@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crono_app/pages/Cronos.dart';
-
+import 'package:provider/provider.dart';
 import 'pages/Cronos.dart';
+import 'package:provider/provider.dart';
+import './store/cronos.store.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,16 +12,23 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        Provider<CronosStore>(
+          create: (_) => CronosStore(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Cronos(
+          titulo: 'trabalho',
+          valor: 25,
+        ),
+        debugShowCheckedModeBanner: false,
       ),
-      home: Cronos(
-        titulo: 'trabalho',
-        valor: 25,
-      ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
